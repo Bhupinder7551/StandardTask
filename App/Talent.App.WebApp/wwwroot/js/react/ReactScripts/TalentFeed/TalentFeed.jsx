@@ -2,10 +2,12 @@
 import ReactDOM from 'react-dom';
 import Cookies from 'js-cookie'
 import TalentCard from '../TalentFeed/TalentCard.jsx';
+import TalentCardDetail from '../TalentFeed/TalentCardDetail.jsx';
 import { Loader } from 'semantic-ui-react';
 import CompanyProfile from '../TalentFeed/CompanyProfile.jsx';
 import FollowingSuggestion from '../TalentFeed/FollowingSuggestion.jsx';
 import { BodyWrapper, loaderData } from '../Layout/BodyWrapper.jsx';
+import  TalentDetail  from '../TalentFeed/TalentDetail.jsx';
 
 export default class TalentFeed extends React.Component {
     constructor(props) {
@@ -40,12 +42,28 @@ export default class TalentFeed extends React.Component {
         this.init()
     };
 
-   
+
     render() {
 
         return (
             <BodyWrapper reload={this.init} loaderData={this.state.loaderData}>
-                <div className="ui container">Your code goes here</div>
+                <div style={{ margin: "55px" }} className="ui container">
+
+
+
+                    <div style={{ float: "left", margin: "25px" }}>
+                        <CompanyProfile />
+                    </div>
+                    <div >
+                        <TalentCardDetail />
+
+                    </div>
+                    <div style={{ float: "right" }}>
+                        <FollowingSuggestion />
+                    </div>
+                    <TalentCard />
+                <TalentDetail />
+                </div>
             </BodyWrapper>
         )
     }
