@@ -1,49 +1,76 @@
-﻿import React from 'react';
+﻿/////////////////////////////////////////////////////////////////////////
+import React from 'react';
 import { Loader } from 'semantic-ui-react';
+import { Card, Icon, Image } from 'semantic-ui-react';
 
 export default class CompanyProfile extends React.Component {
     constructor(props) {
         super(props);
-      
-        }
 
+        const details = props.details ? Object.assign({}, props.details) :
+            {
+                name: "",
+                email: "",
+                phone: "",
+
+            }
+    }
 
     render() {
+        let Name = this.props.details ? this.props.details.name : ""
+        let Phone = this.props.details ? this.props.details.phone : ""
+        let Email = this.props.details ? this.props.details.email : ""
+        let City = this.props.details ? this.props.details.location.city : ""
+        let Country = this.props.details ? this.props.details.location.country : ""
 
-
+        console.log(this.props.details)
         return (
 
+            <Card >
 
-            <div class="ui card">
-                <div style={{ margin: "15px" }} >
-                    <img className="ui tiny circular centered image" src="http://semantic-ui.com/images/wireframe/square-image.png"
+                <Card.Content className="center aligned">
+                    <div className="add-media"> <Image src='https://react.semantic-ui.com/images/wireframe/image.png' size='mini' /></div><br />
 
-                        height="20px" width="20px" />
-                </div>
-                <div style={{ textAlign: "center" }}>
-                    <a class="header">MVP Studio</a>
-                    <div class="meta">
-                        <span class="date"> <i class="map pin icon"></i>Auckland, New Zealand</span>
-                    </div>
-                    <div class="description">
-                        We currently do not have specific <br /> skills that we desire.
-    </div>
-                </div>
-                <div class="extra content">
-                    <a>
-                        <i class="phone icon"></i>
-                        : 232323
-  <br />
 
-                        <i class="envelope icon"></i>
-                        software Developer
-                        </a>
+                    <Card.Header>{Name}</Card.Header>
+                    <Card.Meta><Icon name="map pin icon" />
+                        {City},{Country}
+                    </Card.Meta>
+                    <Card.Description>
+                        <h5>
+                            We currently do not have specific skills that we desire
+                        </h5>
+                    </Card.Description>
+                </Card.Content>
+                <Card.Content extra>
 
-                </div>
-            </div>
+                    <i className="phone icon" />:{Phone}<br />
+                    <i className="mail icon" />:{Email}
+
+
+
+
+
+
+                </Card.Content>
+            </Card>
 
         )
 
     }
-
 }
+////////////////////////////////////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+
+
+
+

@@ -127,7 +127,7 @@ namespace Talent.Api.Controllers
         {
             try
             {
-                return Json(new { Success = true, Data = await _profileService.GetTalentSnapshot(talentId) });
+                return Json(new { Success = true, Beta = await _profileService.GetTalentSnapshot(talentId) });
             }
             catch (Exception e)
             {

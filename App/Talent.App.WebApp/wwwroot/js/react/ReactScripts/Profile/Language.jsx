@@ -165,8 +165,7 @@ export default class Language extends React.Component {
                                     name="level"
                                     value={this.state.level}
                                     placeholder="Language Level"
-                                    onChange={this.dropdown}
-                                >
+                                    onChange={this.dropdown}                                >
 
                                     <option value="0">Language Level</option>
                                     <option value="Basic">Basic</option>

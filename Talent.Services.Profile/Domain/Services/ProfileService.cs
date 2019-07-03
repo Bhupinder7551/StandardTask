@@ -62,10 +62,10 @@ namespace Talent.Services.Profile.Domain.Services
             {
                 videoUrl = string.IsNullOrWhiteSpace(profile.VideoName)
                           ? ""
-                          : await _fileService.GetFileURL(profile.VideoName, FileType.ProfilePhoto);
+                          : await _fileService.GetFileURL(profile.VideoName, FileType.UserVideo);
                 photoUrl = string.IsNullOrWhiteSpace(profile.ProfilePhoto)
                          ? ""
-                         : await _fileService.GetFileURL(profile.ProfilePhoto, FileType.UserVideo);
+                         : await _fileService.GetFileURL(profile.ProfilePhoto, FileType.ProfilePhoto);
 
                 var skills = profile.Skills.Select(x => ViewModelFromSkill(x)).ToList();
                 var languages = profile.Languages.Select(x => ViewModelFromLanguages(x)).ToList();
@@ -457,8 +457,8 @@ namespace Talent.Services.Profile.Domain.Services
         public async Task<IEnumerable<TalentSnapshotViewModel>> GetTalentSnapshotList(string employerOrJobId, bool forJob, int position, int increment)
         {
             //Your code here;
-           throw new NotImplementedException();
-           
+            throw new NotImplementedException();
+
 
 
         }

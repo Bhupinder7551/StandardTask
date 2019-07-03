@@ -434,50 +434,80 @@ namespace Talent.Services.Profile.Controllers
 
         [HttpGet("getTalent")]
         [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "recruiter, employer")]
-        public async Task<IActionResult> GetTalentSnapshots(FeedIncrementModel feed)
+        public async Task<IActionResult> GetTalentSnapshots()
         {
+            string id = "";
+           string Id = string.IsNullOrWhiteSpace(id) ? _userAppContext.CurrentUserId : id;
+            Employer pro = null;
+            pro = (await _employerRepository.GetByIdAsync(Id));
             try
             {
-                var result = (await _profileService.GetTalentSnapshotList(_userAppContext.CurrentUserId, false, feed.Position, feed.Number)).ToList();
-                // Dummy talent to fill out the list once we run out of data
-                if (result.Count == 0)
+                var result = new TalentSnapshotViewModel
                 {
-                    result.Add(
-                            new Models.TalentSnapshotViewModel
-                            {
-                                CurrentEmployment = "Software Developer at XYZ",
-                                Level = "Junior",
-                                Name = "Dummy User...",
-                                PhotoId = "",
-                                Skills = new List<string> { "C#", ".Net Core", "Javascript", "ReactJS", "PreactJS" },
-                                Summary = "Veronika Ossi is a set designer living in New York who enjoys kittens, music, and partying.",
-                                Visa = "Citizen"
-                            }
-                        );
-                }
-                // Dummy talent to fill out the list once we run out of data
-                //if (result.Count == 0)
-                //{
-                //    result.Add(
-                //            new Models.TalentSnapshotViewModel
-                //            {
-                //                CurrentEmployment = "Software Developer at XYZ",
-                //                Level = "Junior",
-                //                Name = "Dummy User...",
-                //                PhotoId = "",
-                //                Skills = new List<string> { "C#", ".Net Core", "Javascript", "ReactJS", "PreactJS" },
-                //                Summary = "Veronika Ossi is a set designer living in New York who enjoys kittens, music, and partying.",
-                //                Visa = "Citizen"
-                //            }
-                //        );
-                //}
-                return Json(new { Success = true, Data = result });
+                    CurrentEmployment = "Software Developer at XYZ",
+                    Level = "Junior",
+                    Name = "Bhupinder Singh ",
+                    PhotoId = "",
+                    Skills = new List<string> { "C#", ".Net Core", "Javascript", "ReactJS", "PreactJS" },
+                    Summary = "Veronika Ossi is a set designer living in New York who enjoys kittens, music, and partying.",
+                    Visa = "3 year open work visa"
+                };
+
+
+                return Json(new { Success = true, beta = result });
             }
             catch (Exception e)
             {
                 return Json(new { Success = false, e.Message });
             }
         }
+
+        //[HttpGet("getTalent")]
+        //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme, Roles = "recruiter, employer")]
+        //public async Task<IActionResult> GetTalentSnapshots(FeedIncrementModel feed)
+        //{
+        //    try
+        //    {
+        //        var result = (await _profileService.GetTalentSnapshotList(_userAppContext.CurrentUserId, false, feed.Position, feed.Number)).ToList();
+        //        // Dummy talent to fill out the list once we run out of data
+        //        if (result.Count == 0)
+        //        {
+        //            result.Add(
+        //                    new Models.TalentSnapshotViewModel
+        //                    {
+        //                        CurrentEmployment = "Software Developer at XYZ",
+        //                        Level = "Junior",
+        //                        Name = "Dummy User...",
+        //                        PhotoId = "",
+        //                        Skills = new List<string> { "C#", ".Net Core", "Javascript", "ReactJS", "PreactJS" },
+        //                        Summary = "Veronika Ossi is a set designer living in New York who enjoys kittens, music, and partying.",
+        //                        Visa = "Citizen"
+        //                    }
+        //                );
+        //        }
+        //        // Dummy talent to fill out the list once we run out of data
+        //        //if (result.Count == 0)
+        //        //{
+        //        //    result.Add(
+        //        //            new Models.TalentSnapshotViewModel
+        //        //            {
+        //        //                CurrentEmployment = "Software Developer at XYZ",
+        //        //                Level = "Junior",
+        //        //                Name = "Dummy User...",
+        //        //                PhotoId = "",
+        //        //                Skills = new List<string> { "C#", ".Net Core", "Javascript", "ReactJS", "PreactJS" },
+        //        //                Summary = "Veronika Ossi is a set designer living in New York who enjoys kittens, music, and partying.",
+        //        //                Visa = "Citizen"
+        //        //            }
+        //        //        );
+        //        //}
+        //        return Json(new { Success = true, Data = result });
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        return Json(new { Success = false, e.Message });
+        //    }
+        //}
         #endregion
 
         #region TalentMatching
